@@ -4,9 +4,6 @@ import GMPDistributionAbi from "../artifacts/contracts/GMPDistribution.sol/GMPDi
 import chains from "../chains.json";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
-
   const evmChains = getEvmChains();
 
   const privateKey = process.env.PRIVATE_KEY;
@@ -21,12 +18,12 @@ async function main() {
   for (const chain of evmChains) {
     const provider = getDefaultProvider(chain.rpc);
     const connectedWallet = wallet.connect(provider);
-    const lockContract = await deployContract(
+    const gmpDistribution = await deployContract(
       connectedWallet,
       GMPDistributionAbi,
-      [unlockTime]
+      [chain.gateway, chain.gasService]
     );
-    console.log(`${chain.name} contract address: ${lockContract.address}`);
+    console.log(`${chain.name} contract address: ${gmpDistribution.address}`);
   }
 }
 
