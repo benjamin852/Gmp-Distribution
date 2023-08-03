@@ -16,4 +16,20 @@ contract GMPDistribution is AxelarExecutable {
     ) AxelarExecutable(_gateway) {
         gasService = _IAxelarGasService(_gasService);
     }
+
+    /**
+     * @notice send token from source to many accounts on dest chain
+     * @param _destChain dest blockchain name
+     * @param _destContractAddr contract address on dest chain
+     * @param _destinationAddrs recipient addreses on dest chain
+     * @param _symbol token symbol
+     * @param _amount token amount
+     */
+    function sendToMany(
+        string memory _destChain,
+        string memory _destContractAddr,
+        address[] calldata _destinationAddrs,
+        string memory _symbol,
+        uint256 _amount
+    ) {}
 }
