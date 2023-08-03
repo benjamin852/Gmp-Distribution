@@ -31,5 +31,21 @@ contract GMPDistribution is AxelarExecutable {
         address[] calldata _destinationAddrs,
         string memory _symbol,
         uint256 _amount
-    ) {}
+    ) external payable {
+        require(msg.value > 0, "Gas payment required");
+
+        //get token address from symbol
+        address tokenAddress = gateway.tokenAddresses(_symbol);
+
+        //send funds to this contract
+        IERC20(tokenAddress).transferFrom(msg.sender, address(this), _amount);
+
+        //approve gateway to spend funds
+        IERC20(tokenAddress).approve(address(gateway), _amount);
+
+        //encode recipient addressess tx on destiantion chain
+        bytes memory recipientAddressesEncoded = abi.encode(
+            _destinationAddresses
+        );
+    }
 }
