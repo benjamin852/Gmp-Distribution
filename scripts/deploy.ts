@@ -1,6 +1,7 @@
-import { Wallet, getDefaultProvider } from "ethers";
+import { Wallet, getDefaultProvider, ethers } from "ethers";
 import { deployContract } from "@axelar-network/axelar-local-dev";
 import GMPDistributionAbi from "../artifacts/contracts/GMPDistribution.sol/GMPDistribution.json";
+import MockERC20 from "../artifacts/@openzeppelin/contracts/token/ERC20/IERC20.sol/IERC20.json";
 import chains from "../chains.json";
 
 async function main() {
@@ -15,6 +16,7 @@ async function main() {
   }
 
   const wallet = new Wallet(privateKey);
+
   for (const chain of evmChains) {
     const provider = getDefaultProvider(chain.rpc);
     const connectedWallet = wallet.connect(provider);
@@ -23,7 +25,18 @@ async function main() {
       GMPDistributionAbi,
       [chain.gateway, chain.gasService]
     );
-    console.log(`${chain.name} contract address: ${gmpDistribution.address}`);
+
+    const mockERC20 = new ethers.Contract(
+      chain.aUSDC,
+      MockERC20.abi,
+      connectedWallet
+    );
+
+    await mockERC20.approve(gmpDistribution.address, "1234567895");
+
+    await console.log(
+      `${chain.name} contract address: ${gmpDistribution.address}`
+    );
   }
 }
 
