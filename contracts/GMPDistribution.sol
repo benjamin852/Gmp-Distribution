@@ -47,5 +47,25 @@ contract GMPDistribution is AxelarExecutable {
         bytes memory recipientAddressesEncoded = abi.encode(
             _destinationAddresses
         );
+
+        //pay gas from source chain
+        gasService.payNativeGasForContractCallWithToken{value: msg.value}(
+            address(this), //sender
+            _destinationChain,
+            _destinationContractAddress,
+            recipientAddressesEncoded, //payload
+            _symbol,
+            _amount,
+            msg.sender
+        );
+
+        //send token & execute call
+        gateway.callContractWithToken(
+            _destinationChain,
+            _destinationContractAddress,
+            recipientAddressesEncoded,
+            _symbol,
+            _amount
+        );
     }
 }
