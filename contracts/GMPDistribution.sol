@@ -44,15 +44,13 @@ contract GMPDistribution is AxelarExecutable {
         IERC20(tokenAddress).approve(address(gateway), _amount);
 
         //encode recipient addressess tx on destiantion chain
-        bytes memory recipientAddressesEncoded = abi.encode(
-            _destinationAddresses
-        );
+        bytes memory recipientAddressesEncoded = abi.encode(_destinationAddrs);
 
         //pay gas from source chain
         gasService.payNativeGasForContractCallWithToken{value: msg.value}(
             address(this), //sender
-            _destinationChain,
-            _destinationContractAddress,
+            _destChain,
+            _destContractAddr,
             recipientAddressesEncoded, //payload
             _symbol,
             _amount,
@@ -61,8 +59,8 @@ contract GMPDistribution is AxelarExecutable {
 
         //send token & execute call
         gateway.callContractWithToken(
-            _destinationChain,
-            _destinationContractAddress,
+            _destChain,
+            _destContractAddr,
             recipientAddressesEncoded,
             _symbol,
             _amount
