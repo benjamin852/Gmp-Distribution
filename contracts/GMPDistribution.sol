@@ -18,7 +18,7 @@ contract GMPDistribution is AxelarExecutable {
     }
 
     /**
-     * @notice send token from source to many accounts on dest chain
+     * @notice send token from source to many accounts from src chain
      * @param _destChain dest blockchain name
      * @param _destContractAddr contract address on dest chain
      * @param _destinationAddrs recipient addreses on dest chain
@@ -68,4 +68,18 @@ contract GMPDistribution is AxelarExecutable {
             _amount
         );
     }
+
+    /**
+     * @notice execute message on destination chain
+     * @param _payload encoded recipient addresses
+     * @param _tokenSymbol symbol of the token to be sent
+     * @param _amount amount of tokens to be sent
+     */
+    function _executeWithToken(
+        string calldata,
+        string calldata,
+        bytes calldata _payload,
+        string calldata _tokenSymbol,
+        uint256 _amount
+    ) internal override {}
 }
