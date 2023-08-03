@@ -81,5 +81,19 @@ contract GMPDistribution is AxelarExecutable {
         bytes calldata _payload,
         string calldata _tokenSymbol,
         uint256 _amount
-    ) internal override {}
+    ) internal override {
+        // decode recipients
+        address[] memory recipients = abi.decode(_payload, (address[]));
+
+        // get token addr
+        address tokenAddress = gateway.tokenAddresses(_tokenSymbol);
+
+        // get amount per recipient
+        uint256 sentAmount = _amount / recipients.length;
+
+        for (uint256 i = 0; i < recipients.length; i++) {
+            //transfer to each recipient
+            IERC20(tokenAddress).transfer(recipients[i], sentAmount);
+        }
+    }
 }
