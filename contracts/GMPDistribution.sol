@@ -14,7 +14,7 @@ contract GMPDistribution is AxelarExecutable {
         address _gateway,
         address _gasService
     ) AxelarExecutable(_gateway) {
-        gasService = _IAxelarGasService(_gasService);
+        gasService = IAxelarGasService(_gasService);
     }
 
     /**
