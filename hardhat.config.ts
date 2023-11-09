@@ -14,10 +14,10 @@ const config: HardhatUserConfig = {
       accounts: [`0x${process.env.PRIVATE_KEY}`],
       network_id: 80001,
     },
-    avalanche: {
+    fantom: {
       url: chains[1].rpc,
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
-      network_id: 43113,
+      accounts: { mnemonic: process.env.PRIVATE_KEY },
+      network_id: 4002,
     },
   },
 };
