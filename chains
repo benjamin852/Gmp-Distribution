@@ -9,3 +9,14 @@
     "tokenName": "Avax",
     "tokenSymbol": "AVAX"
   }
+
+  {
+    "name": "Fantom",
+    "chainId": 4002,
+    "rpc": "https://rpc.ankr.com/fantom_testnet",
+    "aUSDC": "0x75Cc4fDf1ee3E781C1A3Ee9151D5c6Ce34Cf5C61",
+    "gateway": "0x97837985Ec0494E7b9C71f5D3f9250188477ae14",
+    "gasService": "0xbE406F0189A0B4cf3A05C286473D23791Dd44Cc6",
+    "tokenName": "Fantom",
+    "tokenSymbol": "FTM"
+  }
