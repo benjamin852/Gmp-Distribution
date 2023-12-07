@@ -16,7 +16,7 @@ const config: HardhatUserConfig = {
     },
     ethereum: {
       url: chains[1].rpc,
-      accounts: { mnemonic: process.env.PRIVATE_KEY },
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
       network_id: chains[1].chainId,
     },
   },
