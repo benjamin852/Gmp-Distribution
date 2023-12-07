@@ -1,5 +1,7 @@
 ### GMP Demo
 
+Send ERC20 token to multiple (or single) receiver addresses across two chains using Axelar.
+
 To use this
 
 1. Create a .env file and input your private key for an address that has some testnet funds on Ethereum and Polygon
