@@ -12,12 +12,12 @@ const config: HardhatUserConfig = {
     polygon: {
       url: chains[0].rpc,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
-      network_id: 80001,
+      network_id: chains[0].chainId,
     },
     ethereum: {
       url: chains[1].rpc,
-      accounts: { mnemonic: process.env.PRIVATE_KEY },
-      network_id: 4002,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      network_id: chains[1].chainId,
     },
   },
 };
