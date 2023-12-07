@@ -2,7 +2,7 @@
 
 To use this
 
-1. Create a .env file and input your private key for an address that has some testnet funds on Avalanche and Polygon
+1. Create a .env file and input your private key for an address that has some testnet funds on Ethereum and Polygon
 2. Run `hh run scripts/deploy.ts` to deploy on Avalanche and Polygon
 3. Call `sendToMany()` function to transfer funds between Avalanche and Polygon
 
